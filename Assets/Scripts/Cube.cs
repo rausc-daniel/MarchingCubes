@@ -1,15 +1,22 @@
-﻿using System.Runtime.InteropServices.ComTypes;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using TMPro;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    [SerializeField, Range(0, 1)] private float isoValue;
+
     private int[] active;
     private Vector3[] corners;
+    private MeshFilter _filter;
 
     private void Awake()
     {
         active = new int[8];
         corners = new Vector3[12];
+        _filter = GetComponent<MeshFilter>();
     }
 
     private void Start()
@@ -24,11 +31,28 @@ public class Cube : MonoBehaviour
         AddCorner(new Vector3(1, -1, 1), 7);
     }
 
+    private void Update()
+    {
+        foreach (var corner in FindObjectsOfType<Corner>())
+        {
+            if (corner.Value > isoValue && corner.State == State.Inactive)
+            {
+                CornerToggle(corner.Id, corner.GetComponent<MeshRenderer>());
+                corner.State = State.Active;
+            }
+            else if (corner.Value < isoValue && corner.State == State.Active)
+            {
+                CornerToggle(corner.Id, corner.GetComponent<MeshRenderer>());
+                corner.State = State.Inactive;
+            }
+        }
+    }
+
     private void AddCorner(Vector3 position, int id)
     {
         var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         go.transform.SetParent(transform);
-        go.transform.position = position;
+        go.transform.position = transform.position + position;
         go.transform.localScale = Vector3.one * 0.5f;
         var corner = go.AddComponent<Corner>();
         corner.Id = id;
@@ -36,7 +60,7 @@ public class Cube : MonoBehaviour
         corners[id] = position;
     }
 
-    private Vector3[] vertices;
+    private List<Vector3> vertices;
 
     private void CornerToggle(int id, MeshRenderer renderer)
     {
@@ -56,11 +80,37 @@ public class Cube : MonoBehaviour
         }
 
         int current = 0;
-        vertices = new Vector3[12];
+        vertices = new List<Vector3>();
         for (int i = 0; Extensions.TriTable[active.Index()][i] != -1; i++)
         {
-            vertices[i] = vertList[Extensions.TriTable[active.Index()][i]];
+            try
+            {
+                vertices.Add(vertList[Extensions.TriTable[active.Index()][i]]);
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
+
+        RenderMesh(vertices.ToArray());
+    }
+
+    private void RenderMesh(Vector3[] vertices)
+    {
+        var mesh = new Mesh();
+        mesh.vertices = vertices;
+        var triangles = new int[vertices.Length - vertices.Length % 3];
+        for (int i = 0; i < triangles.Length; i += 3)
+        {
+            triangles[i] = i + 0;
+            triangles[i + 1] = i + 2;
+            triangles[i + 2] = i + 1;
+        }
+
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        _filter.mesh = mesh;
     }
 
     private void OnDrawGizmos()
@@ -69,9 +119,9 @@ public class Cube : MonoBehaviour
 
         foreach (var pos in vertices)
         {
-            if(pos == default) continue;
-            
-            Gizmos.DrawWireSphere(pos, 0.1f);
+            if (pos == default) continue;
+
+            Gizmos.DrawWireSphere(transform.position + pos, 0.1f);
         }
     }
 }
