@@ -1,8 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using TMPro;
 using UnityEngine;
+
+public struct Triangle
+{
+    public Vector3[] Vertices;
+
+    public Triangle(Vector3[] vertices)
+    {
+        Vertices = vertices;
+    }
+}
 
 public class Cube : MonoBehaviour
 {
@@ -60,7 +68,7 @@ public class Cube : MonoBehaviour
         corners[id] = position;
     }
 
-    private List<Vector3> vertices;
+    private List<Triangle> triangles;
 
     private void CornerToggle(int id, MeshRenderer renderer)
     {
@@ -80,19 +88,22 @@ public class Cube : MonoBehaviour
         }
 
         int current = 0;
-        vertices = new List<Vector3>();
-        for (int i = 0; Extensions.TriTable[active.Index()][i] != -1; i++)
+        triangles = new List<Triangle>();
+        for (int i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
         {
             try
             {
-                vertices.Add(vertList[Extensions.TriTable[active.Index()][i]]);
+                var p0 = vertList[Extensions.TriTable[active.Index()][i]];
+                var p1 = vertList[Extensions.TriTable[active.Index()][i + 1]];
+                var p2 = vertList[Extensions.TriTable[active.Index()][i + 2]];
+                triangles.Add(new Triangle(new[] {p0, p1, p2}));
             }
             catch (IndexOutOfRangeException)
             {
             }
         }
 
-        RenderMesh(vertices.ToArray());
+        RenderMesh(triangles.GetVertices());
     }
 
     private void RenderMesh(Vector3[] vertices)
@@ -113,15 +124,18 @@ public class Cube : MonoBehaviour
         _filter.mesh = mesh;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (vertices == null) return;
-
-        foreach (var pos in vertices)
-        {
-            if (pos == default) continue;
-
-            Gizmos.DrawWireSphere(transform.position + pos, 0.1f);
-        }
-    }
+//    private void OnDrawGizmos()
+//    {
+//        if (triangles == null) return;
+//
+//        foreach (var pos in triangles)
+//        {
+//            foreach (var vertex in pos.Vertices)
+//            {
+//                if (vertex == default) continue;
+//
+//                Gizmos.DrawWireSphere(transform.position + vertex, 0.1f);
+//            }
+//        }
+//    }
 }

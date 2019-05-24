@@ -23,6 +23,22 @@ public static class Extensions
         return sum;
     }
 
+    public static Vector3[] GetVertices(this List<Triangle> triangles)
+    {
+        var vertices = new Vector3[triangles.Count * 3];
+        int i = 0;
+        for (int tri = 0; tri < triangles.Count; tri++)
+        {
+            var triangle = triangles[tri];
+            vertices[i] = triangle.Vertices[0];
+            vertices[i + 1] = triangle.Vertices[1];
+            vertices[i + 2] = triangle.Vertices[2];
+            i += 3;
+        }
+
+        return vertices;
+    }
+
     public static int[] ValueTable = {1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7};
 
     public static int[] EdgeTable =
