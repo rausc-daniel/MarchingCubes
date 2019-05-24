@@ -17,7 +17,6 @@ sysinfo.txt
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 [Ee]xported[Oo]bj/
-.vs/
 /*.userprefs
 /*.csproj
 /*.pidb
@@ -44,3 +43,10 @@ ehthumbs.db
 [Dd]esktop.ini
 Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
+
+# ============ #
+# IDE Bullshit #
+# ============ #
+.idea/
+.vs/
+.vscode/
