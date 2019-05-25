@@ -1,55 +1,68 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using SimplexNoise;
+using TreeEditor;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class WorldController : MonoBehaviour
 {
     [SerializeField] private int size;
-    [SerializeField] private float scale;
-    [SerializeField, Range(0, 0.5f)] private float isoValue;
+    [SerializeField] private int resolution;
+    [SerializeField, Range(0, 5)] private int offset;
+    [SerializeField, Range(0, 1)] private float noiseSize;
+    [SerializeField, Range(0, 1)] private float isoValue;
 
     private float[] values;
     private Vector3[] nodes;
-
+    private MeshFilter _filter;
 
     private void Awake()
     {
         size++;
+        resolution++;
 
-        values = new float[Mathf.RoundToInt(Mathf.Pow(size, 3))];
-        nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(size, 3))];
+        var noise = new FastNoise();
 
-        var noise = Noise.Calc3D(size, size, size, 1000000);
+        values = new float[Mathf.RoundToInt(Mathf.Pow(resolution, 3))];
+        nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(resolution, 3))];
 
-        for (int x = 0; x < size; x++)
+        for (int x = 0; x < resolution; x++)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 0; y < resolution; y++)
             {
-                for (int z = 0; z < size; z++)
+                for (int z = 0; z < resolution; z++)
                 {
-                    int index = GetIndex(x, y, z);
-                    var pos = new Vector3(x, y, z) * scale;
-                    values[index] = noise[x, y, z];
+                    var pos = new Vector3(x, y, z) * size / resolution;
 //                    var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 //                    obj.transform.position = pos;
-                    nodes[x + size * y + size * size * z] = pos;
+                    nodes[x + resolution * y + resolution * resolution * z] = pos;
                 }
             }
         }
+
+        Generate();
+    }
+
+    private float Noise(float x, float y, float z)
+    {
+        return (Mathf.PerlinNoise(x, y) + Mathf.PerlinNoise(y, x) +
+                Mathf.PerlinNoise(x, z) + Mathf.PerlinNoise(z, x) +
+                Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
     }
 
     private void Update()
     {
+        Generate();
+    }
+
+    private void Generate()
+    {
         var triangles = new List<Triangle>();
 
-        for (int x = 0; x < size - 1; x++)
+        for (int x = 0; x < resolution - 1; x++)
         {
-            for (int y = 0; y < size - 1; y++)
+            for (int y = 0; y < resolution - 1; y++)
             {
-                for (int z = 0; z < size - 1; z++)
+                for (int z = 0; z < resolution - 1; z++)
                 {
                     var indices = new int[]
                     {
@@ -62,6 +75,13 @@ public class WorldController : MonoBehaviour
                         GetIndex(x + 1, y + 1, z + 1),
                         GetIndex(x + 1, y + 0, z + 1)
                     };
+
+                    int index = GetIndex(x, y, z);
+                    values[index] = Noise(offset + (float) x / resolution / noiseSize,
+                        offset + (float) y / resolution / noiseSize,
+                        offset + (float) z / resolution / noiseSize);
+
+                    cubePosition = Vector3.Lerp(nodes[indices[0]], nodes[indices[6]], 0.5f);
 
                     var corners = new Vector3[8];
                     int cubeIndex = 0;
@@ -106,13 +126,14 @@ public class WorldController : MonoBehaviour
         return p1 + t * (p2 - p1);
     }
 
-    private MeshFilter _filter;
+    private Vector3[] verts;
 
     private void RenderMesh(Vector3[] vertices)
     {
         _filter = GetComponent<MeshFilter>();
 
         var mesh = new Mesh();
+        verts = vertices;
         mesh.vertices = vertices;
         var triangles = new int[vertices.Length - vertices.Length % 3];
         for (int i = 0; i < triangles.Length; i += 3)
@@ -128,6 +149,8 @@ public class WorldController : MonoBehaviour
         _filter.mesh = mesh;
     }
 
+    private Vector3 cubePosition;
+
 //    private void Update()
 //    {
 //        for (int i = 0; i < values.Length; i++)
@@ -140,6 +163,16 @@ public class WorldController : MonoBehaviour
 //            {
 //                nodes[i].SetActive(true);
 //            }
+//        }
+//    }
+
+//    private void OnDrawGizmosSelected()
+//    {
+//        Gizmos.color = Color.red;
+//
+//        foreach (var vert in verts)
+//        {
+//            Gizmos.DrawWireSphere(vert, 1f / resolution);
 //        }
 //    }
 
