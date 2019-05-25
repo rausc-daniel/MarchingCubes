@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using SimplexNoise;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,9 +18,11 @@ public class WorldController : MonoBehaviour
     private void Awake()
     {
         size++;
-        
+
         values = new float[Mathf.RoundToInt(Mathf.Pow(size, 3))];
         nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(size, 3))];
+
+        var noise = Noise.Calc3D(size, size, size, 1);
 
         for (int x = 0; x < size; x++)
         {
@@ -29,7 +32,7 @@ public class WorldController : MonoBehaviour
                 {
                     int index = GetIndex(x, y, z);
                     var pos = new Vector3(x, y, z) * scale;
-                    values[index] = Random.Range(0f, 1f);
+                    values[index] = noise[x, y, z];
 //                    var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 //                    obj.transform.position = pos;
                     nodes[x + size * y + size * size * z] = pos;
@@ -77,7 +80,7 @@ public class WorldController : MonoBehaviour
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
                             vertList[i] = Vector3.Lerp(corners[i % 8],
-                                corners[Extensions.ValueTable[i]], 0.5f);
+                                              corners[Extensions.ValueTable[i]], 0.5f) * scale;
                         }
                     }
 

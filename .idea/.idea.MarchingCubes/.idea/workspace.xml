@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef7b0309-b042-4ecf-99f3-884a4beb8bdc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/World.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/World.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cube.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cube.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Extensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Extensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MarchingCubes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MarchingCubes/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/WorldController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WorldController.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Cube.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="583">
-              <caret line="122" column="5" lean-forward="true" selection-start-line="106" selection-start-column="4" selection-end-line="122" selection-end-column="5" />
+              <caret line="122" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="122" selection-end-column="5" />
               <folding>
                 <marker date="1558780754428" expanded="true" signature="6:66" ph="..." />
                 <marker date="1558780754428" expanded="true" signature="90:207" ph="{...}" />
@@ -47,28 +45,86 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/WorldController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1760">
-              <caret line="96" column="44" selection-start-line="96" selection-start-column="44" selection-end-line="96" selection-end-column="44" />
+            <state relative-caret-position="180">
+              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
               <folding>
-                <marker date="1558786181656" expanded="true" signature="6:127" ph="..." />
-                <marker date="1558786181656" expanded="true" signature="173:4358" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="399:427" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="454:3379" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="633:1175" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="686:1165" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="747:1151" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="935:1068" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
-                <marker date="1558786181656" expanded="true" signature="1266:3327" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="1323:3317" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="1388:3303" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="1471:1933" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="2072:2307" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="2479:2802" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="2583:2780" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="2926:3285" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="3461:3943" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="3705:3835" ph="{...}" />
-                <marker date="1558786181656" expanded="true" signature="3945:4274" ph="/* private void Update() ... */" />
+                <marker date="1558787746552" expanded="true" signature="6:147" ph="..." />
+                <marker date="1558787746552" expanded="true" signature="193:4450" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="419:1213" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="671:1207" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="724:1197" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="785:1183" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
+                <marker date="1558787746552" expanded="true" signature="1240:3471" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="1336:3419" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="1393:3409" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="1458:3395" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="1541:2003" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="2142:2377" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="2549:2894" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="2653:2872" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="3018:3377" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="3553:4035" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="3797:3927" ph="{...}" />
+                <marker date="1558787746552" expanded="true" signature="4037:4366" ph="/* private void Update() ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Noise.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="820">
+              <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+              <folding>
+                <marker date="1558787605338" expanded="true" signature="0:241" ph="/* Simplex Noise for C## ... */" />
+                <marker date="1558787605338" expanded="true" signature="280:15047" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="287:526" ph="/// Implementation of the Perlin simplex noise, an improved Perlin noise algorithm. ... " />
+                <marker date="1558787605338" expanded="true" signature="556:15045" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="623:818" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="893:1163" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="1252:1603" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="1664:1736" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="1804:1887" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="1962:2056" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2080:2194" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2226:2723" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2278:2713" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2324:2470" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2491:2667" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="2768:2902" ph="/// 1D simplex noise ... " />
+                <marker date="1558787605338" expanded="true" signature="2949:3510" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="3335:3461" ph="/* The maximum value of this noise is 8*(3/4)^4 = 2.53125 ... */" />
+                <marker date="1558787605338" expanded="true" signature="3520:3691" ph="/// 2D simplex noise ... " />
+                <marker date="1558787605338" expanded="true" signature="3747:6508" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="4493:4608" ph="/* For the 2D case, the simplex shape is an equilateral triangle. ... */" />
+                <marker date="1558787605338" expanded="true" signature="4791:4828" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="4896:5076" ph="/* A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and ... */" />
+                <marker date="1558787605338" expanded="true" signature="5665:5787" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="5890:6022" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="6125:6255" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="6269:6413" ph="/* Add contributions from each corner to get the final noise value. ... */" />
+                <marker date="1558787605338" expanded="true" signature="6575:10875" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="7469:7593" ph="/* For the 3D case, the simplex shape is a slightly irregular tetrahedron. ... */" />
+                <marker date="1558787605338" expanded="true" signature="7872:8203" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="7916:7984" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="8101:8174" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="8220:8542" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="8440:8513" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="8556:8829" ph="/* A step of (1,0,0) in (i,j,k) means a step of (1-c,-c,-c) in (x,y,z), ... */" />
+                <marker date="1558787605338" expanded="true" signature="9698:9836" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="9949:10102" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="10215:10368" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="10481:10631" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="10645:10775" ph="/* Add contributions from each corner to get the final noise value. ... */" />
+                <marker date="1558787605338" expanded="true" signature="10969:13176" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="13224:13300" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="13346:13431" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="13485:13788" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="13851:14178" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="14250:14600" ph="{...}" />
+                <marker date="1558787605338" expanded="true" signature="14681:15039" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -127,6 +183,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Extensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Cube.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/WorldController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Noise.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Corner.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -135,6 +192,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Corner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Extensions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cube.cs" />
+        <option value="$PROJECT_DIR$/Assets/Noise.cs" />
         <option value="$PROJECT_DIR$/Assets/WorldController.cs" />
       </list>
     </option>
@@ -160,6 +218,15 @@
     <panes>
       <pane id="AssemblyExplorer" />
       <pane id="UnityExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="8711f2a6:AssetsRoot" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
         <option name="show-hidden-items" value="false" />
         <option name="show-project-names" value="true" />
       </pane>
@@ -186,18 +253,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="8104">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="8104" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="5004">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="8104">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="5004" />
+      <option name="pid" value="8104" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -218,13 +285,13 @@
     <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32929516" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39977974" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39883268" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -349,7 +416,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Cube.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="583">
-          <caret line="122" column="5" lean-forward="true" selection-start-line="106" selection-start-column="4" selection-end-line="122" selection-end-column="5" />
+          <caret line="122" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="122" selection-end-column="5" />
           <folding>
             <marker date="1558780754428" expanded="true" signature="6:66" ph="..." />
             <marker date="1558780754428" expanded="true" signature="90:207" ph="{...}" />
@@ -373,30 +440,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Noise.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <folding>
+            <marker date="1558787605338" expanded="true" signature="0:241" ph="/* Simplex Noise for C## ... */" />
+            <marker date="1558787605338" expanded="true" signature="280:15047" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="287:526" ph="/// Implementation of the Perlin simplex noise, an improved Perlin noise algorithm. ... " />
+            <marker date="1558787605338" expanded="true" signature="556:15045" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="623:818" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="893:1163" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="1252:1603" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="1664:1736" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="1804:1887" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="1962:2056" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2080:2194" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2226:2723" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2278:2713" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2324:2470" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2491:2667" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="2768:2902" ph="/// 1D simplex noise ... " />
+            <marker date="1558787605338" expanded="true" signature="2949:3510" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="3335:3461" ph="/* The maximum value of this noise is 8*(3/4)^4 = 2.53125 ... */" />
+            <marker date="1558787605338" expanded="true" signature="3520:3691" ph="/// 2D simplex noise ... " />
+            <marker date="1558787605338" expanded="true" signature="3747:6508" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="4493:4608" ph="/* For the 2D case, the simplex shape is an equilateral triangle. ... */" />
+            <marker date="1558787605338" expanded="true" signature="4791:4828" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="4896:5076" ph="/* A step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and ... */" />
+            <marker date="1558787605338" expanded="true" signature="5665:5787" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="5890:6022" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="6125:6255" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="6269:6413" ph="/* Add contributions from each corner to get the final noise value. ... */" />
+            <marker date="1558787605338" expanded="true" signature="6575:10875" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="7469:7593" ph="/* For the 3D case, the simplex shape is a slightly irregular tetrahedron. ... */" />
+            <marker date="1558787605338" expanded="true" signature="7872:8203" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="7916:7984" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="8101:8174" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="8220:8542" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="8440:8513" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="8556:8829" ph="/* A step of (1,0,0) in (i,j,k) means a step of (1-c,-c,-c) in (x,y,z), ... */" />
+            <marker date="1558787605338" expanded="true" signature="9698:9836" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="9949:10102" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="10215:10368" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="10481:10631" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="10645:10775" ph="/* Add contributions from each corner to get the final noise value. ... */" />
+            <marker date="1558787605338" expanded="true" signature="10969:13176" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="13224:13300" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="13346:13431" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="13485:13788" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="13851:14178" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="14250:14600" ph="{...}" />
+            <marker date="1558787605338" expanded="true" signature="14681:15039" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/WorldController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="96" column="44" selection-start-line="96" selection-start-column="44" selection-end-line="96" selection-end-column="44" />
+        <state relative-caret-position="180">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
           <folding>
-            <marker date="1558786181656" expanded="true" signature="6:127" ph="..." />
-            <marker date="1558786181656" expanded="true" signature="173:4358" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="399:427" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="454:3379" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="633:1175" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="686:1165" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="747:1151" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="935:1068" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
-            <marker date="1558786181656" expanded="true" signature="1266:3327" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="1323:3317" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="1388:3303" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="1471:1933" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="2072:2307" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="2479:2802" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="2583:2780" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="2926:3285" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="3461:3943" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="3705:3835" ph="{...}" />
-            <marker date="1558786181656" expanded="true" signature="3945:4274" ph="/* private void Update() ... */" />
+            <marker date="1558787746552" expanded="true" signature="6:147" ph="..." />
+            <marker date="1558787746552" expanded="true" signature="193:4450" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="419:1213" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="671:1207" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="724:1197" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="785:1183" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
+            <marker date="1558787746552" expanded="true" signature="1240:3471" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="1336:3419" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="1393:3409" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="1458:3395" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="1541:2003" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="2142:2377" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="2549:2894" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="2653:2872" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="3018:3377" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="3553:4035" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="3797:3927" ph="{...}" />
+            <marker date="1558787746552" expanded="true" signature="4037:4366" ph="/* private void Update() ... */" />
           </folding>
         </state>
       </provider>
