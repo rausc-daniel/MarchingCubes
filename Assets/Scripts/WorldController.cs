@@ -133,15 +133,21 @@ public class WorldController : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < 2; i++)
+        for (int x = 0; x < 3; x++)
         {
-            var go = new GameObject();
-            var filter = go.AddComponent<MeshFilter>();
-            var renderer = go.AddComponent<MeshRenderer>();
-            renderer.material = material;
-            var chunk = new Chunk(20, 5, new Vector3(i, 0, 0), Noise, 1);
-            chunk.CalculatePoints();
-            RenderMesh(chunk.March(0.4f), filter);
+            for (int y = 0; y < 3; y++)
+            {
+                for (int z = 0; z < 3; z++)
+                {
+                    var go = new GameObject($"Chunk [{x}, {y}, {z}]");
+                    var filter = go.AddComponent<MeshFilter>();
+                    var renderer = go.AddComponent<MeshRenderer>();
+                    renderer.material = material;
+                    var chunk = new Chunk(10, 15, new Vector3(x, y, z), Noise, 1);
+                    chunk.CalculatePoints();
+                    RenderMesh(chunk.March(0.5f), filter);
+                }
+            }
         }
     }
 

@@ -34,14 +34,11 @@ public struct Chunk
                 for (int z = 0; z < resolution; z++)
                 {
                     int index = GetIndex(x, y, z);
-                    var pos = offset * size + new Vector3(x, y, z) * size / resolution;
-                    var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    go.transform.position = pos;
-                    go.transform.localScale = Vector3.one / 10;
+                    var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
                     nodes[index] = pos;
-                    values[index] = noiseFunc(offset.x + (float) x / resolution / noiseSize,
-                        offset.y + (float) y / resolution / noiseSize,
-                        offset.z + (float) z / resolution / noiseSize);
+                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
+                                      new Vector3(x, y, z) * noiseSize / resolution;
+                    values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
         }
