@@ -23,7 +23,7 @@ public class Cube : MonoBehaviour
     private void Awake()
     {
         active = new int[8];
-        corners = new Corner[12];
+        corners = new Corner[8];
         _filter = GetComponent<MeshFilter>();
     }
 
@@ -46,7 +46,7 @@ public class Cube : MonoBehaviour
 
         foreach (var corner in corners)
         {
-            if(corner is null)
+            if (corner is null)
                 continue;
 
             if (corner.Value > isoValue && corner.State == State.Inactive)
@@ -80,7 +80,6 @@ public class Cube : MonoBehaviour
     {
         active[id] = (active[id] + 1) % 2;
         renderer.material.color = active[id] == 1 ? Color.red : Color.white;
-        active.Log();
         int edgeIndex = Extensions.EdgeTable[active.Index()];
         var vertList = new Vector3[12];
         for (int i = 0; i < 12; i++)
@@ -96,16 +95,10 @@ public class Cube : MonoBehaviour
         triangles = new List<Triangle>();
         for (int i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
         {
-            try
-            {
-                var p0 = vertList[Extensions.TriTable[active.Index()][i]];
-                var p1 = vertList[Extensions.TriTable[active.Index()][i + 1]];
-                var p2 = vertList[Extensions.TriTable[active.Index()][i + 2]];
-                triangles.Add(new Triangle(new[] {p0, p1, p2}));
-            }
-            catch (IndexOutOfRangeException)
-            {
-            }
+            var p0 = vertList[Extensions.TriTable[active.Index()][i]];
+            var p1 = vertList[Extensions.TriTable[active.Index()][i + 1]];
+            var p2 = vertList[Extensions.TriTable[active.Index()][i + 2]];
+            triangles.Add(new Triangle(new[] {p0, p1, p2}));
         }
 
         RenderMesh(triangles.GetVertices());

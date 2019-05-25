@@ -17,9 +17,6 @@ public static class Extensions
                 sum += Mathf.RoundToInt(Mathf.Pow(2, i));
             }
         }
-
-        Debug.Log(sum);
-
         return sum;
     }
 
