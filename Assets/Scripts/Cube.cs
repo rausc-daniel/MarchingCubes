@@ -17,13 +17,13 @@ public class Cube : MonoBehaviour
     [SerializeField, Range(0, 1)] private float isoValue;
 
     private int[] active;
-    private Vector3[] corners;
+    private Corner[] corners;
     private MeshFilter _filter;
 
     private void Awake()
     {
         active = new int[8];
-        corners = new Vector3[12];
+        corners = new Corner[12];
         _filter = GetComponent<MeshFilter>();
     }
 
@@ -41,8 +41,14 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-        foreach (var corner in FindObjectsOfType<Corner>())
+        if (corners is null)
+            return;
+
+        foreach (var corner in corners)
         {
+            if(corner is null)
+                continue;
+
             if (corner.Value > isoValue && corner.State == State.Inactive)
             {
                 CornerToggle(corner.Id, corner.GetComponent<MeshRenderer>());
@@ -60,12 +66,12 @@ public class Cube : MonoBehaviour
     {
         var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         go.transform.SetParent(transform);
-        go.transform.position = transform.position + position;
+        go.transform.position = position;
         go.transform.localScale = Vector3.one * 0.5f;
         var corner = go.AddComponent<Corner>();
         corner.Id = id;
         corner.OnClick = CornerToggle;
-        corners[id] = position;
+        corners[id] = corner;
     }
 
     private List<Triangle> triangles;
@@ -81,9 +87,8 @@ public class Cube : MonoBehaviour
         {
             if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
             {
-                vertList[i] = Vector3.Lerp(corners[i % 8], corners[Extensions.ValueTable[i]], 0.5f);
-                Debug.Log(corners[i % 8]);
-                Debug.Log(corners[Extensions.ValueTable[i]]);
+                vertList[i] = Vector3.Lerp(corners[i % 8].transform.position,
+                    corners[Extensions.ValueTable[i]].transform.position, 0.5f);
             }
         }
 

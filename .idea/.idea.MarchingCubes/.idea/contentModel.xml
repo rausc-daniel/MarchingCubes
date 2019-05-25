@@ -11,6 +11,7 @@
           <e p="Cube.cs" t="Include" />
           <e p="Extensions.cs" t="Include" />
         </e>
+        <e p="WorldController.cs" t="Include" />
       </e>
       <e p="MarchingCubes.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
