@@ -9,7 +9,7 @@ public class WorldController : MonoBehaviour
 {
     [SerializeField] private int size;
     [SerializeField] private float scale;
-    [SerializeField, Range(0, 1)] private float isoValue;
+    [SerializeField, Range(0, 0.5f)] private float isoValue;
 
     private float[] values;
     private Vector3[] nodes;
@@ -22,7 +22,7 @@ public class WorldController : MonoBehaviour
         values = new float[Mathf.RoundToInt(Mathf.Pow(size, 3))];
         nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(size, 3))];
 
-        var noise = Noise.Calc3D(size, size, size, 1);
+        var noise = Noise.Calc3D(size, size, size, 1000000);
 
         for (int x = 0; x < size; x++)
         {
@@ -79,8 +79,8 @@ public class WorldController : MonoBehaviour
                     {
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
-                            vertList[i] = Vector3.Lerp(corners[i % 8],
-                                              corners[Extensions.ValueTable[i]], 0.5f) * scale;
+                            vertList[i] = InterpolateVerts(corners[i % 8], corners[Extensions.ValueTable[i]],
+                                values[indices[i % 8]], values[indices[Extensions.ValueTable[i]]]);
                         }
                     }
 
@@ -98,6 +98,12 @@ public class WorldController : MonoBehaviour
         }
 
         RenderMesh(triangles.GetVertices());
+    }
+
+    private Vector3 InterpolateVerts(Vector3 p1, Vector3 p2, float v1, float v2)
+    {
+        float t = (isoValue - v1) / (v2 - v1);
+        return p1 + t * (p2 - p1);
     }
 
     private MeshFilter _filter;

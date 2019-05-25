@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef7b0309-b042-4ecf-99f3-884a4beb8bdc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MarchingCubes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MarchingCubes/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/WorldController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WorldController.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,28 +44,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/WorldController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="260">
+              <caret line="81" column="75" selection-start-line="81" selection-start-column="75" selection-end-line="81" selection-end-column="75" />
               <folding>
-                <marker date="1558787746552" expanded="true" signature="6:147" ph="..." />
-                <marker date="1558787746552" expanded="true" signature="193:4450" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="419:1213" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="671:1207" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="724:1197" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="785:1183" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
-                <marker date="1558787746552" expanded="true" signature="1240:3471" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="1336:3419" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="1393:3409" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="1458:3395" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="1541:2003" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="2142:2377" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="2549:2894" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="2653:2872" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="3018:3377" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="3553:4035" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="3797:3927" ph="{...}" />
-                <marker date="1558787746552" expanded="true" signature="4037:4366" ph="/* private void Update() ... */" />
+                <marker date="1558789071971" expanded="true" signature="6:147" ph="..." />
+                <marker date="1558789071971" expanded="true" signature="193:4784" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="419:1250" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="671:1207" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="724:1197" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="785:1183" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
+                <marker date="1558789071971" expanded="true" signature="1286:3627" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="1382:3621" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="1439:3611" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="1504:3597" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="1587:2049" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="2188:2423" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="2595:2983" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="2699:2961" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="3107:3466" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="3713:3805" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="3887:4369" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="4131:4261" ph="{...}" />
+                <marker date="1558789071971" expanded="true" signature="4371:4700" ph="/* private void Update() ... */" />
               </folding>
             </state>
           </provider>
@@ -76,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Noise.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="820">
-              <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+              <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
               <folding>
                 <marker date="1558787605338" expanded="true" signature="0:241" ph="/* Simplex Noise for C## ... */" />
                 <marker date="1558787605338" expanded="true" signature="280:15047" ph="{...}" />
@@ -443,7 +443,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Noise.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="820">
-          <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
           <folding>
             <marker date="1558787605338" expanded="true" signature="0:241" ph="/* Simplex Noise for C## ... */" />
             <marker date="1558787605338" expanded="true" signature="280:15047" ph="{...}" />
@@ -498,28 +498,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/WorldController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="260">
+          <caret line="81" column="75" selection-start-line="81" selection-start-column="75" selection-end-line="81" selection-end-column="75" />
           <folding>
-            <marker date="1558787746552" expanded="true" signature="6:147" ph="..." />
-            <marker date="1558787746552" expanded="true" signature="193:4450" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="419:1213" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="671:1207" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="724:1197" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="785:1183" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
-            <marker date="1558787746552" expanded="true" signature="1240:3471" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="1336:3419" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="1393:3409" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="1458:3395" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="1541:2003" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="2142:2377" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="2549:2894" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="2653:2872" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="3018:3377" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="3553:4035" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="3797:3927" ph="{...}" />
-            <marker date="1558787746552" expanded="true" signature="4037:4366" ph="/* private void Update() ... */" />
+            <marker date="1558789071971" expanded="true" signature="6:147" ph="..." />
+            <marker date="1558789071971" expanded="true" signature="193:4784" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="419:1250" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="671:1207" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="724:1197" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="785:1183" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="967:1100" ph="/* var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere); ... */" />
+            <marker date="1558789071971" expanded="true" signature="1286:3627" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="1382:3621" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="1439:3611" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="1504:3597" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="1587:2049" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="2188:2423" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="2595:2983" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="2699:2961" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="3107:3466" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="3713:3805" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="3887:4369" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="4131:4261" ph="{...}" />
+            <marker date="1558789071971" expanded="true" signature="4371:4700" ph="/* private void Update() ... */" />
           </folding>
         </state>
       </provider>
