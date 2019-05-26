@@ -11,6 +11,7 @@
           <e p="Corner.cs" t="Include" />
           <e p="Cube.cs" t="Include" />
           <e p="Extensions.cs" t="Include" />
+          <e p="SubController.cs" t="Include" />
           <e p="Visualization.cs" t="Include" />
           <e p="WorldController.cs" t="Include" />
         </e>

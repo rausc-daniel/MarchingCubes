@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class WorldController : MonoBehaviour
         mesh.RecalculateNormals();
 
         filter.mesh = mesh;
+        var collider = filter.gameObject.AddComponent<MeshCollider>();
+        collider.sharedMesh = null;
+        collider.sharedMesh = mesh;
     }
 
     private Vector3 cubePosition;
