@@ -35,6 +35,13 @@ public static class Extensions
 
         return vertices;
     }
+    
+    public static float Noise(float x, float y, float z)
+    {
+        return (Mathf.PerlinNoise(x, y) + Mathf.PerlinNoise(y, x) +
+                Mathf.PerlinNoise(x, z) + Mathf.PerlinNoise(z, x) +
+                Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
+    }
 
     public static int[] ValueTable = {1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7};
 

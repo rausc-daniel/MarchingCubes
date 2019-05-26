@@ -10,13 +10,6 @@ public class WorldController : MonoBehaviour
 
     [SerializeField] private Material material;
 
-    private float Noise(float x, float y, float z)
-    {
-        return (Mathf.PerlinNoise(x, y) + Mathf.PerlinNoise(y, x) +
-                Mathf.PerlinNoise(x, z) + Mathf.PerlinNoise(z, x) +
-                Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
-    }
-
     private void Awake()
     {
         for (int x = 0; x < spread.x; x++)
@@ -29,7 +22,7 @@ public class WorldController : MonoBehaviour
                     var filter = go.AddComponent<MeshFilter>();
                     var renderer = go.AddComponent<MeshRenderer>();
                     renderer.material = material;
-                    var chunk = new Chunk(chunkSize, chunkRes, new Vector3(x, y, z), Noise, 1);
+                    var chunk = new Chunk(chunkSize, chunkRes, new Vector3(x, y, z), Extensions.Noise, 1);
                     chunk.CalculatePoints();
                     RenderMesh(chunk.March(0.5f), filter);
                 }
