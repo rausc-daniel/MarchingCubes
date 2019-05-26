@@ -10,8 +10,7 @@ public class Visualization : MonoBehaviour
     [SerializeField] private Material material;
     [SerializeField] private float isoLevel;
     [SerializeField] private float delay;
-
-    private const float NoiseSize = 1f;
+    [SerializeField] private float noiseSize;
 
     private Vector3 offset = Vector3.zero;
     private Func<float, float, float, float> noiseFunc = Extensions.Noise;
@@ -50,9 +49,10 @@ public class Visualization : MonoBehaviour
                     var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     go.transform.position = pos;
                     go.transform.localScale = Vector3.one * 0.1f;
+                    go.transform.SetParent(transform);
                     nodes[index] = pos;
-                    var noiseOffset = offset * (NoiseSize - NoiseSize / resolution) +
-                                      new Vector3(x, y, z) * NoiseSize / resolution;
+                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
+                                      new Vector3(x, y, z) * noiseSize / resolution;
                     values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
@@ -167,13 +167,16 @@ public class Visualization : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(cubePosition, Vector3.one * size / resolution);
+        
+        if(vertices is null)
+            return;
+        
         Gizmos.color = Color.red;
         foreach (var vertex in vertices)
         {
             Gizmos.DrawWireSphere(vertex, 0.1f);
         }
-
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(cubePosition, Vector3.one * size / resolution);
     }
 }

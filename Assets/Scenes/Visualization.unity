@@ -197,10 +197,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 10
-  resolution: 15
+  resolution: 10
   material: {fileID: 2100000, guid: 98680b0336e0328408db0dcd11796e80, type: 2}
-  isoLevel: 0.4
+  isoLevel: 0.45
   delay: 0
+  noiseSize: 4
 --- !u!4 &220928251
 Transform:
   m_ObjectHideFlags: 0
