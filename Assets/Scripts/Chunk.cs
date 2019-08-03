@@ -13,6 +13,14 @@ public struct Chunk
     private readonly float[] values;
     private readonly Vector3[] nodes;
 
+    /// <summary>
+    /// Initialize a new Chunk
+    /// </summary>
+    /// <param name="size">the width, height and depth of a chunk in world unity</param>
+    /// <param name="resolution">how many nodes each chunk should have</param>
+    /// <param name="offset">where the chunk should be positioned relative to the origin</param>
+    /// <param name="noiseFunc">the function that generates the noise</param>
+    /// <param name="noiseSize">the resolution of the noise</param>
     public Chunk(int size, int resolution, Vector3 offset, Func<float, float, float, float> noiseFunc, float noiseSize)
     {
         this.size = size + 1;
@@ -25,6 +33,9 @@ public struct Chunk
         nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(this.resolution, 3))];
     }
 
+    /// <summary>
+    /// Calculate where each node should be both in the world and in the noise
+    /// </summary>
     public void CalculatePoints()
     {
         for (var x = 0; x < resolution; x++)
@@ -43,6 +54,11 @@ public struct Chunk
         }
     }
 
+    /// <summary>
+    ///  Applies the Marching Cubes Algorithm for the calculated points
+    /// </summary>
+    /// <param name="isoLevel">the threshold for the marching cubes algorithm</param>
+    /// <returns>an array of vertices the mesh is comprised of</returns>
     public Vector3[] March(float isoLevel)
     {
         var vertices = new List<Vector3>();
@@ -99,11 +115,27 @@ public struct Chunk
         return vertices.ToArray();
     }
 
+    /// <summary>
+    /// Considers the values of the nodes for placement of vertices
+    /// </summary>
+    /// <param name="isoLevel">the threshold for the marching cubes algorithm</param>
+    /// <param name="p1">the lower bound of the interpolation</param>
+    /// <param name="p2">the upper bound of the interpolation</param>
+    /// <param name="v1">the value of the lower bound</param>
+    /// <param name="v2">the value of the upper bound</param>
+    /// <returns></returns>
     private Vector3 InterpolateVerts(float isoLevel, Vector3 p1, Vector3 p2, float v1, float v2)
     {
         var t = (isoLevel - v1) / (v2 - v1);
         return p1 + t * (p2 - p1);
     }
 
+    /// <summary>
+    /// Transform a 3-dimensional point into a 1-dimensional array index
+    /// </summary>
+    /// <param name="x">x-coordinate</param>
+    /// <param name="y">y-coordinate</param>
+    /// <param name="z">z-coordinate</param>
+    /// <returns>the index in a 1-dimensional array</returns>
     private int GetIndex(int x, int y, int z) => resolution * resolution * z + resolution * y + x;
 }
