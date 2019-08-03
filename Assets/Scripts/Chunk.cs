@@ -27,17 +27,16 @@ public struct Chunk
 
     public void CalculatePoints()
     {
-        for (int x = 0; x < resolution; x++)
+        for (var x = 0; x < resolution; x++)
         {
-            for (int y = 0; y < resolution; y++)
+            for (var y = 0; y < resolution; y++)
             {
-                for (int z = 0; z < resolution; z++)
+                for (var z = 0; z < resolution; z++)
                 {
-                    int index = GetIndex(x, y, z);
+                    var index = GetIndex(x, y, z);
                     var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
                     nodes[index] = pos;
-                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
-                                      new Vector3(x, y, z) * noiseSize / resolution;
+                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) + new Vector3(x, y, z) * noiseSize / resolution;
                     values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
@@ -48,11 +47,11 @@ public struct Chunk
     {
         var vertices = new List<Vector3>();
 
-        for (int x = 0; x < resolution - 1; x++)
+        for (var x = 0; x < resolution - 1; x++)
         {
-            for (int y = 0; y < resolution - 1; y++)
+            for (var y = 0; y < resolution - 1; y++)
             {
-                for (int z = 0; z < resolution - 1; z++)
+                for (var z = 0; z < resolution - 1; z++)
                 {
                     var indices = new[]
                     {
@@ -67,18 +66,18 @@ public struct Chunk
                     };
 
                     var corners = new Vector3[8];
-                    int cubeIndex = 0;
-                    for (int i = 0; i < 8; i++)
+                    var cubeIndex = 0;
+                    for (var i = 0; i < 8; i++)
                     {
                         corners[i] = nodes[indices[i]];
                         if (values[indices[i]] > isoLevel)
                             cubeIndex |= Mathf.RoundToInt(Mathf.Pow(2, i));
                     }
 
-                    int edgeIndex = Extensions.EdgeTable[cubeIndex];
+                    var edgeIndex = Extensions.EdgeTable[cubeIndex];
 
                     var vertList = new Vector3[12];
-                    for (int i = 0; i < 12; i++)
+                    for (var i = 0; i < 12; i++)
                     {
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
@@ -87,7 +86,7 @@ public struct Chunk
                         }
                     }
 
-                    for (int i = 0; Extensions.TriTable[cubeIndex][i] != -1; i += 3)
+                    for (var i = 0; Extensions.TriTable[cubeIndex][i] != -1; i += 3)
                     {
                         vertices.Add(vertList[Extensions.TriTable[cubeIndex][i]]);
                         vertices.Add(vertList[Extensions.TriTable[cubeIndex][i + 1]]);
@@ -102,7 +101,7 @@ public struct Chunk
 
     private Vector3 InterpolateVerts(float isoLevel, Vector3 p1, Vector3 p2, float v1, float v2)
     {
-        float t = (isoLevel - v1) / (v2 - v1);
+        var t = (isoLevel - v1) / (v2 - v1);
         return p1 + t * (p2 - p1);
     }
 

@@ -38,13 +38,13 @@ public class Visualization : MonoBehaviour
         values = new float[Mathf.RoundToInt(Mathf.Pow(resolution, 3))];
         nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(resolution, 3))];
 
-        for (int x = 0; x < resolution; x++)
+        for (var x = 0; x < resolution; x++)
         {
-            for (int y = 0; y < resolution; y++)
+            for (var y = 0; y < resolution; y++)
             {
-                for (int z = 0; z < resolution; z++)
+                for (var z = 0; z < resolution; z++)
                 {
-                    int index = GetIndex(x, y, z);
+                    var index = GetIndex(x, y, z);
                     var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
                     var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     go.transform.position = pos;
@@ -84,11 +84,11 @@ public class Visualization : MonoBehaviour
     {
         vertices = new List<Vector3>();
 
-        for (int x = 0; x < resolution - 1; x++)
+        for (var x = 0; x < resolution - 1; x++)
         {
-            for (int y = 0; y < resolution - 1; y++)
+            for (var y = 0; y < resolution - 1; y++)
             {
-                for (int z = 0; z < resolution - 1; z++)
+                for (var z = 0; z < resolution - 1; z++)
                 {
                     var indices = new[]
                     {
@@ -105,18 +105,18 @@ public class Visualization : MonoBehaviour
                     cubePosition = Vector3.Lerp(nodes[indices[0]], nodes[indices[6]], 0.5f);
 
                     var corners = new Vector3[8];
-                    int cubeIndex = 0;
-                    for (int i = 0; i < 8; i++)
+                    var cubeIndex = 0;
+                    for (var i = 0; i < 8; i++)
                     {
                         corners[i] = nodes[indices[i]];
                         if (values[indices[i]] > isoLevel)
                             cubeIndex |= Mathf.RoundToInt(Mathf.Pow(2, i));
                     }
 
-                    int edgeIndex = Extensions.EdgeTable[cubeIndex];
+                    var edgeIndex = Extensions.EdgeTable[cubeIndex];
 
                     var vertList = new Vector3[12];
-                    for (int i = 0; i < 12; i++)
+                    for (var i = 0; i < 12; i++)
                     {
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
@@ -125,7 +125,7 @@ public class Visualization : MonoBehaviour
                         }
                     }
 
-                    for (int i = 0; Extensions.TriTable[cubeIndex][i] != -1; i += 3)
+                    for (var i = 0; Extensions.TriTable[cubeIndex][i] != -1; i += 3)
                     {
                         vertices.Add(vertList[Extensions.TriTable[cubeIndex][i]]);
                         vertices.Add(vertList[Extensions.TriTable[cubeIndex][i + 1]]);
@@ -144,7 +144,7 @@ public class Visualization : MonoBehaviour
         var mesh = new Mesh();
         mesh.vertices = vertices;
         var triangles = new int[vertices.Length - vertices.Length % 3];
-        for (int i = 0; i < triangles.Length; i += 3)
+        for (var i = 0; i < triangles.Length; i += 3)
         {
             triangles[i] = i + 0;
             triangles[i + 1] = i + 2;
@@ -159,7 +159,7 @@ public class Visualization : MonoBehaviour
 
     private Vector3 InterpolateVerts(float isoLevel, Vector3 p1, Vector3 p2, float v1, float v2)
     {
-        float t = (isoLevel - v1) / (v2 - v1);
+        var t = (isoLevel - v1) / (v2 - v1);
         return p1 + t * (p2 - p1);
     }
 

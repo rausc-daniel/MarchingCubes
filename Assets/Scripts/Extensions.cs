@@ -9,8 +9,8 @@ public static class Extensions
 
     public static int Index(this int[] arr)
     {
-        int sum = 0;
-        for (int i = 0; i < arr.Length; i++)
+        var sum = 0;
+        for (var i = 0; i < arr.Length; i++)
         {
             if (arr[i] == 1)
             {
@@ -23,8 +23,8 @@ public static class Extensions
     public static Vector3[] GetVertices(this List<Triangle> triangles)
     {
         var vertices = new Vector3[triangles.Count * 3];
-        int i = 0;
-        for (int tri = 0; tri < triangles.Count; tri++)
+        var i = 0;
+        for (var tri = 0; tri < triangles.Count; tri++)
         {
             var triangle = triangles[tri];
             vertices[i] = triangle.Vertices[0];

@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
@@ -13,11 +12,11 @@ public class WorldController : MonoBehaviour
 
     private void Awake()
     {
-        for (int x = 0; x < spread.x; x++)
+        for (var x = 0; x < spread.x; x++)
         {
-            for (int y = 0; y < spread.y; y++)
+            for (var y = 0; y < spread.y; y++)
             {
-                for (int z = 0; z < spread.z; z++)
+                for (var z = 0; z < spread.z; z++)
                 {
                     var go = new GameObject($"Chunk [{x}, {y}, {z}]");
                     var filter = go.AddComponent<MeshFilter>();
@@ -38,7 +37,7 @@ public class WorldController : MonoBehaviour
         var mesh = new Mesh();
         mesh.vertices = vertices;
         var triangles = new int[vertices.Length - vertices.Length % 3];
-        for (int i = 0; i < triangles.Length; i += 3)
+        for (var i = 0; i < triangles.Length; i += 3)
         {
             triangles[i] = i + 0;
             triangles[i + 1] = i + 2;

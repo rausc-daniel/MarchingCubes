@@ -80,9 +80,9 @@ public class Cube : MonoBehaviour
     {
         active[id] = (active[id] + 1) % 2;
         renderer.material.color = active[id] == 1 ? Color.red : Color.white;
-        int edgeIndex = Extensions.EdgeTable[active.Index()];
+        var edgeIndex = Extensions.EdgeTable[active.Index()];
         var vertList = new Vector3[12];
-        for (int i = 0; i < 12; i++)
+        for (var i = 0; i < 12; i++)
         {
             if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
             {
@@ -91,9 +91,9 @@ public class Cube : MonoBehaviour
             }
         }
 
-        int current = 0;
+        var current = 0;
         triangles = new List<Triangle>();
-        for (int i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
+        for (var i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
         {
             var p0 = vertList[Extensions.TriTable[active.Index()][i]];
             var p1 = vertList[Extensions.TriTable[active.Index()][i + 1]];
@@ -109,7 +109,7 @@ public class Cube : MonoBehaviour
         var mesh = new Mesh();
         mesh.vertices = vertices;
         var triangles = new int[vertices.Length - vertices.Length % 3];
-        for (int i = 0; i < triangles.Length; i += 3)
+        for (var i = 0; i < triangles.Length; i += 3)
         {
             triangles[i] = i + 0;
             triangles[i + 1] = i + 2;
