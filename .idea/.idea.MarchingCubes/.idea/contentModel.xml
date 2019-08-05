@@ -10,13 +10,20 @@
           <e p="NewSurfaceShader.shader" t="Include" />
         </e>
         <e p="Scripts" t="Include">
-          <e p="Chunk.cs" t="Include" />
-          <e p="Corner.cs" t="Include" />
-          <e p="Cube.cs" t="Include" />
-          <e p="Extensions.cs" t="Include" />
-          <e p="SubController.cs" t="Include" />
-          <e p="Visualization.cs" t="Include" />
-          <e p="WorldController.cs" t="Include" />
+          <e p="Core" t="Include">
+            <e p="Chunk.cs" t="Include" />
+            <e p="Extensions.cs" t="Include" />
+          </e>
+          <e p="SpawnTest.cs" t="Include" />
+          <e p="Visualization" t="Include">
+            <e p="Corner.cs" t="Include" />
+            <e p="Cube.cs" t="Include" />
+            <e p="Visualization.cs" t="Include" />
+          </e>
+          <e p="World" t="Include">
+            <e p="SubController.cs" t="Include" />
+            <e p="WorldController.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="MarchingCubes.sln" t="IncludeFlat" />
