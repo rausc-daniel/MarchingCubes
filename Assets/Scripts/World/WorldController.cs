@@ -1,18 +1,39 @@
 ﻿using UnityEngine;
 
+public enum WorldType
+{
+    Static,
+    Dynamic
+}
+
 public class WorldController : MonoBehaviour
 {
-    [SerializeField] private int chunkSize;
-    [SerializeField] private int chunkRes;
+    public int ChunkSize;
+    public int ChunkRes;
+    public Vector3Int spread;
+    public Material material;
+    public WorldType Type;
 
-    [SerializeField, Tooltip("How many Chunks should be generated in each direction")]
-    private Vector3Int spread;
+    private Transform anchor;
 
-    [SerializeField] private Material material;
-
-    private void Awake()
+    public void GenerateWorld()
     {
-        GenerateDynamicWorld();
+        if(anchor != null)
+        {
+            Destroy(anchor.gameObject);
+        }
+
+        anchor = new GameObject("WorldAnchor").transform;
+        
+        switch (Type)
+        {
+            case WorldType.Static:
+                GenerateStaticWorld();
+                break;
+            case WorldType.Dynamic:
+                GenerateDynamicWorld();
+                break;
+        }
     }
 
     private void GenerateStaticWorld()
@@ -23,7 +44,7 @@ public class WorldController : MonoBehaviour
             {
                 for (var z = 0; z < spread.z; z++)
                 {
-                    CreateChunk(new Vector3(x, y, z));
+                    CreateChunk(new Vector3(x, y, z), anchor);
                 }
             }
         }
@@ -33,17 +54,18 @@ public class WorldController : MonoBehaviour
     {
         foreach (var offset in Extensions.CreateChunks(spread.x))
         {
-            CreateChunk(offset);
+            CreateChunk(offset, anchor);
         }
     }
 
-    private void CreateChunk(Vector3 offset)
+    private void CreateChunk(Vector3 offset, Transform parent)
     {
         var go = new GameObject($"Chunk [{offset.x}, {offset.y}, {offset.z}]");
         var filter = go.AddComponent<MeshFilter>();
         var renderer = go.AddComponent<MeshRenderer>();
+        go.transform.SetParent(anchor);
         renderer.material = material;
-        var chunk = new Chunk(chunkSize, chunkRes, offset, Extensions.Noise, 1f);
+        var chunk = new Chunk(ChunkSize, ChunkRes, offset, Extensions.Noise, 1f);
         chunk.CalculatePoints();
         RenderMesh(chunk.March(0.5f), filter);
     }
