@@ -42,6 +42,41 @@ public static class Extensions
                 Mathf.PerlinNoise(x, z) + Mathf.PerlinNoise(z, x) +
                 Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
     }
+    
+    public static List<Vector3> CreateChunks(int radius)
+    {
+        var positions = new List<Vector3>();
+        
+        for (var i = 0; i < radius; i++)
+        {
+            CreatePlane(positions, radius, i, radius - i);
+            CreatePlane(positions, radius, i, -radius + i);
+        }
+
+        CreatePlane(positions, radius, radius, 0);
+        return positions;
+    }
+
+    private static void CreatePlane(List<Vector3> positions, int radius, int r, int y)
+    {
+        for (var posY = 0; posY < r; posY++)
+        {
+            CreateRow(positions, radius, posY, y, -posY + r);
+            CreateRow(positions, radius, posY, -y, posY - r);
+        }
+
+        CreateRow(positions, radius, r, y, 0);
+    }
+
+    private static void CreateRow(List<Vector3> positions, int radius, int r, float y, float z)
+    {
+        for (var posX = -radius; posX < radius + 1; posX++)
+        {
+            if (posX < -r || posX > r) continue;
+            
+            positions.Add(new Vector3(posX, y, z));
+        }
+    }
 
     public static int[] ValueTable = {1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7};
 

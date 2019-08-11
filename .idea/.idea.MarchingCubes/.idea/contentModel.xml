@@ -14,7 +14,6 @@
             <e p="Chunk.cs" t="Include" />
             <e p="Extensions.cs" t="Include" />
           </e>
-          <e p="SpawnTest.cs" t="Include" />
           <e p="Visualization" t="Include">
             <e p="Corner.cs" t="Include" />
             <e p="Cube.cs" t="Include" />
