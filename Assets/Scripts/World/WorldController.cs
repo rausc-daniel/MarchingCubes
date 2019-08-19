@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum WorldType
 {
@@ -15,16 +16,22 @@ public class WorldController : MonoBehaviour
     public WorldType Type;
 
     private Transform anchor;
+    public Dictionary<Vector3, Vector3[]> chunkDict { get; } = new Dictionary<Vector3, Vector3[]>();
+
+    private void Start()
+    {
+        GenerateWorld();
+    }
 
     public void GenerateWorld()
     {
-        if(anchor != null)
+        if (anchor != null)
         {
-            Destroy(anchor.gameObject);
+            DestroyImmediate(anchor.gameObject);
         }
 
         anchor = new GameObject("WorldAnchor").transform;
-        
+
         switch (Type)
         {
             case WorldType.Static:
@@ -44,7 +51,7 @@ public class WorldController : MonoBehaviour
             {
                 for (var z = 0; z < spread.z; z++)
                 {
-                    CreateChunk(new Vector3(x, y, z), anchor);
+                    CreateChunk(new Vector3(x, y, z));
                 }
             }
         }
@@ -52,29 +59,42 @@ public class WorldController : MonoBehaviour
 
     private void GenerateDynamicWorld()
     {
-        foreach (var offset in Extensions.CreateChunks(spread.x))
+        foreach (var offset in Extensions.GetInitialChunkPositions(spread.x))
         {
-            CreateChunk(offset, anchor);
+            CreateChunk(offset);
         }
     }
 
-    private void CreateChunk(Vector3 offset, Transform parent)
+    private void CreateChunk(Vector3 offset)
     {
-        var go = new GameObject($"Chunk [{offset.x}, {offset.y}, {offset.z}]");
-        var filter = go.AddComponent<MeshFilter>();
-        var renderer = go.AddComponent<MeshRenderer>();
-        go.transform.SetParent(anchor);
-        renderer.material = material;
-        var chunk = new Chunk(ChunkSize, ChunkRes, offset, Extensions.Noise, 1f);
-        chunk.CalculatePoints();
-        RenderMesh(chunk.March(0.5f), filter);
+        var chunkBehaviour = SetupChunkObject(offset);
+
+        var center = ((Vector3) spread / 2f).Mul(offset * ChunkSize);
+        var chunk = new Chunk(ChunkSize, ChunkRes, center, offset, Extensions.Noise, 1f);
+        chunk.March(0.5f);
+
+        chunkDict.Add(offset, chunk.MeshVertices);
+
+        chunkBehaviour.Init(chunk);
+        RenderMesh(chunk.MeshVertices, chunkBehaviour.GetComponent<MeshFilter>());
     }
 
+    private ChunkBehaviour SetupChunkObject(Vector3 offset){
+        var chunkObject = new GameObject($"Chunk [{offset.x}, {offset.y}, {offset.z}]");
+        chunkObject.transform.SetParent(anchor);
+
+        var chunkBehaviour = chunkObject.AddComponent<ChunkBehaviour>();
+
+        chunkBehaviour.Renderer.material = material;
+
+        return chunkBehaviour;
+    }
 
     private void RenderMesh(Vector3[] vertices, MeshFilter filter)
     {
         var mesh = new Mesh();
         mesh.vertices = vertices;
+
         var triangles = new int[vertices.Length - vertices.Length % 3];
         for (var i = 0; i < triangles.Length; i += 3)
         {
@@ -84,12 +104,12 @@ public class WorldController : MonoBehaviour
         }
 
         mesh.triangles = triangles;
+
         mesh.RecalculateNormals();
 
         filter.mesh = mesh;
+
         var collider = filter.gameObject.AddComponent<MeshCollider>();
         collider.sharedMesh = mesh;
     }
-
-    private Vector3 cubePosition;
 }

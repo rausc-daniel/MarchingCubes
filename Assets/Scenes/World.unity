@@ -408,10 +408,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e90873f16cc304f826ab3979eab688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkSize: 10
-  chunkRes: 10
-  spread: {x: 0, y: 0, z: 0}
+  ChunkSize: 5
+  ChunkRes: 5
+  spread: {x: 2, y: 2, z: 2}
   material: {fileID: 2100000, guid: 98680b0336e0328408db0dcd11796e80, type: 2}
+  Type: 1
 --- !u!4 &879504418
 Transform:
   m_ObjectHideFlags: 0

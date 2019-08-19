@@ -1,15 +1,32 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class Extensions
 {
-    public static void Log<T>(this IEnumerable<T> list) => Debug.Log($"[ {string.Join(", ", list)} ]");
+    ///<summary>
+    /// Log a collection to the Unity console
+    ///</summary>
+    public static void Log<T>(this IEnumerable<T> list)
+        => Debug.Log($"[ {string.Join(", ", list)} ]");
 
+    ///<summary>
+    /// Multiply the values of two vectors together
+    /// <param name="other">The second multiplier vector</param>
+    /// <returns>A new vector that is the product of the two vectors</returns>
+    ///</summary>
+    public static Vector3 Mul(this Vector3 vec, Vector3 other)
+        => new Vector3(vec.x * other.x, vec.y * other.y, vec.z * other.z);
+
+    /// <summary>
+    /// Calculates the index of a cube for the marching cubes algorithm based on which corners are 'active'
+    /// </summary>
+    /// <param name="arr">The values of the cube's corners</param>
+    /// <returns>The calculated index</returns>
     public static int Index(this int[] arr)
     {
         var sum = 0;
+
         for (var i = 0; i < arr.Length; i++)
         {
             if (arr[i] == 1)
@@ -17,13 +34,20 @@ public static class Extensions
                 sum += Mathf.RoundToInt(Mathf.Pow(2, i));
             }
         }
+        
         return sum;
     }
 
+    /// <summary>
+    /// Transforms a list of triangles into a vertex array usable for meshes
+    /// </summary>
+    /// <param name="triangles">The list of triangles</param>
+    /// <returns>All indices in the right order</returns>
     public static Vector3[] GetVertices(this List<Triangle> triangles)
     {
         var vertices = new Vector3[triangles.Count * 3];
         var i = 0;
+        
         for (var tri = 0; tri < triangles.Count; tri++)
         {
             var triangle = triangles[tri];
@@ -36,6 +60,13 @@ public static class Extensions
         return vertices;
     }
     
+    /// <summary>
+    /// Makes 3D perlin noise out of 2D perlin noise
+    /// </summary>
+    /// <param name="x">The x-Coordinate of the noise value</param>
+    /// <param name="y">The y-Coordinate of the noise value</param>
+    /// <param name="z">The z-Coordinate of the noise value</param>
+    /// <returns>The noise value at the given point</returns>
     public static float Noise(float x, float y, float z)
     {
         return (Mathf.PerlinNoise(x, y) + Mathf.PerlinNoise(y, x) +
@@ -43,38 +74,61 @@ public static class Extensions
                 Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
     }
     
-    public static List<Vector3> CreateChunks(int radius)
+    /// <summary>
+    /// Get the positions of 'spherically' arranged bunch of chunks
+    /// </summary>
+    /// <param name="radius">The amount of chunks in each direction</param>
+    /// <returns>The positions for all chunks arranged inwards and top then bottom</returns>
+    public static List<Vector3> GetInitialChunkPositions(int radius)
     {
         var positions = new List<Vector3>();
         
         for (var i = 0; i < radius; i++)
         {
-            CreatePlane(positions, radius, i, radius - i);
-            CreatePlane(positions, radius, i, -radius + i);
+            CreatePlane(ref positions, radius, i, radius - i);
+            CreatePlane(ref positions, radius, i, -radius + i);
         }
 
-        CreatePlane(positions, radius, radius, 0);
+        CreatePlane(ref positions, radius, radius, 0);
+
         return positions;
     }
 
-    private static void CreatePlane(List<Vector3> positions, int radius, int r, int y)
+    /// <summary>
+    /// Create a plane of circularly arranges chunk positions
+    /// </summary>
+    /// <param name="positions">The target array</param>
+    /// <param name="radius">The amount of chunks in each direction overall</param>
+    /// <param name="r">The amount of chunks in each direction in this plane</param>
+    /// <param name="y">The height index of the plane</param>
+    private static void CreatePlane(ref List<Vector3> positions, int radius, int r, int y)
     {
         for (var posY = 0; posY < r; posY++)
         {
-            CreateRow(positions, radius, posY, y, -posY + r);
-            CreateRow(positions, radius, posY, -y, posY - r);
+            CreateRow(ref positions, radius, posY, y, -posY + r);
+            CreateRow(ref positions, radius, posY, -y, posY - r);
         }
 
-        CreateRow(positions, radius, r, y, 0);
+        CreateRow(ref positions, radius, r, y, 0);
     }
 
-    private static void CreateRow(List<Vector3> positions, int radius, int r, float y, float z)
+    /// <summary>
+    /// Create a row of chunk positions
+    /// </summary>
+    /// <param name="positions">The target array</param>
+    /// <param name="radius">The amount of chunks in each direction overall</param>
+    /// <param name="r">The amount of chunks in each direction in this row</param>
+    /// <param name="y">The height index of the plane</param>
+    /// <param name="z">The depth index of the plane</param>
+    private static void CreateRow(ref List<Vector3> positions, int radius, int r, int y, int z)
     {
         for (var posX = -radius; posX < radius + 1; posX++)
         {
+            var pos = new Vector3(posX, y, z);
+            
             if (posX < -r || posX > r) continue;
             
-            positions.Add(new Vector3(posX, y, z));
+            positions.Add(pos);
         }
     }
 

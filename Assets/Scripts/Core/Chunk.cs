@@ -4,39 +4,49 @@ using UnityEngine;
 
 public struct Chunk
 {
-    private readonly int size;
+    public int Size { get; }
+    public Vector3 Center { get; private set; }
+    
     private readonly int resolution;
     private readonly Vector3 offset;
     private readonly Func<float, float, float, float> noiseFunc;
     private readonly float noiseSize;
+    private readonly Vector3 root;
+    private readonly float[] isoValues;
+    private readonly Vector3[] nodePoisitions;
 
-    private readonly float[] values;
-    private readonly Vector3[] nodes;
+    public Vector3[] MeshVertices;
 
     /// <summary>
     /// Initialize a new Chunk
     /// </summary>
-    /// <param name="size">the width, height and depth of a chunk in world unity</param>
+    /// <param name="size">the width, height and depth of a chunk in world units</param>
     /// <param name="resolution">how many nodes each chunk should have</param>
     /// <param name="offset">where the chunk should be positioned relative to the origin</param>
     /// <param name="noiseFunc">the function that generates the noise</param>
-    /// <param name="noiseSize">the resolution of the noise</param>
-    public Chunk(int size, int resolution, Vector3 offset, Func<float, float, float, float> noiseFunc, float noiseSize)
+    /// <param name="noiseScale">the resolution of the noise</param>
+    public Chunk(int size, int resolution, Vector3 center, Vector3 offset, Func<float, float, float, float> noiseFunc, float noiseScale)
     {
-        this.size = size + 1;
+        this.Size = size;
         this.resolution = resolution + 1;
         this.offset = offset;
         this.noiseFunc = noiseFunc;
-        this.noiseSize = noiseSize;
+        this.noiseSize = noiseScale;
 
-        values = new float[Mathf.RoundToInt(Mathf.Pow(this.resolution, 3))];
-        nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(this.resolution, 3))];
+        MeshVertices = null;
+        
+        Center = center;
+        root = Center - Vector3.one * size / 2f;
+
+        var pointCount = this.resolution * this.resolution * this.resolution;
+        isoValues = new float[pointCount];
+        nodePoisitions = new Vector3[pointCount];
     }
 
     /// <summary>
-    /// Calculate where each node should be both in the world and in the noise
+    /// Calculate where each node should be, both in the world and in the noise
     /// </summary>
-    public void CalculatePoints()
+    private void CalculatePoints()
     {
         for (var x = 0; x < resolution; x++)
         {
@@ -45,10 +55,10 @@ public struct Chunk
                 for (var z = 0; z < resolution; z++)
                 {
                     var index = GetIndex(x, y, z);
-                    var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
-                    nodes[index] = pos;
-                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) + new Vector3(x, y, z) * noiseSize / resolution;
-                    values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
+                    nodePoisitions[index] = root + new Vector3(x, y, z);
+                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
+                                      new Vector3(x, y, z) * noiseSize / resolution;
+                    isoValues[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
         }
@@ -59,8 +69,10 @@ public struct Chunk
     /// </summary>
     /// <param name="isoLevel">the threshold for the marching cubes algorithm</param>
     /// <returns>an array of vertices the mesh is comprised of</returns>
-    public Vector3[] March(float isoLevel)
+    public void March(float isoLevel)
     {
+        CalculatePoints();
+
         var vertices = new List<Vector3>();
 
         for (var x = 0; x < resolution - 1; x++)
@@ -85,8 +97,8 @@ public struct Chunk
                     var cubeIndex = 0;
                     for (var i = 0; i < 8; i++)
                     {
-                        corners[i] = nodes[indices[i]];
-                        if (values[indices[i]] > isoLevel)
+                        corners[i] = nodePoisitions[indices[i]];
+                        if (isoValues[indices[i]] > isoLevel)
                             cubeIndex |= Mathf.RoundToInt(Mathf.Pow(2, i));
                     }
 
@@ -98,7 +110,7 @@ public struct Chunk
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
                             vertList[i] = InterpolateVerts(isoLevel, corners[i % 8], corners[Extensions.ValueTable[i]],
-                                values[indices[i % 8]], values[indices[Extensions.ValueTable[i]]]);
+                                isoValues[indices[i % 8]], isoValues[indices[Extensions.ValueTable[i]]]);
                         }
                     }
 
@@ -112,7 +124,7 @@ public struct Chunk
             }
         }
 
-        return vertices.ToArray();
+        MeshVertices = vertices.ToArray();
     }
 
     /// <summary>
@@ -121,12 +133,12 @@ public struct Chunk
     /// <param name="isoLevel">the threshold for the marching cubes algorithm</param>
     /// <param name="p1">the lower bound of the interpolation</param>
     /// <param name="p2">the upper bound of the interpolation</param>
-    /// <param name="v1">the value of the lower bound</param>
-    /// <param name="v2">the value of the upper bound</param>
+    /// <param name="val1">the value of the lower bound</param>
+    /// <param name="val2">the value of the upper bound</param>
     /// <returns></returns>
-    private Vector3 InterpolateVerts(float isoLevel, Vector3 p1, Vector3 p2, float v1, float v2)
+    private Vector3 InterpolateVerts(float isoLevel, Vector3 p1, Vector3 p2, float val1, float val2)
     {
-        var t = (isoLevel - v1) / (v2 - v1);
+        var t = (isoLevel - val1) / (val2 - val1);
         return p1 + t * (p2 - p1);
     }
 
