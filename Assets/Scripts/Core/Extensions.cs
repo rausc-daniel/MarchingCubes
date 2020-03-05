@@ -23,14 +23,14 @@ public static class Extensions
     public static Vector3[] GetVertices(this List<Triangle> triangles)
     {
         var vertices = new Vector3[triangles.Count * 3];
-        var i = 0;
-        for (var tri = 0; tri < triangles.Count; tri++)
+        
+        int tri, i;
+        for (tri = 0, i = 0; tri < triangles.Count; tri++, i+=3)
         {
             var triangle = triangles[tri];
             vertices[i] = triangle.Vertices[0];
             vertices[i + 1] = triangle.Vertices[1];
             vertices[i + 2] = triangle.Vertices[2];
-            i += 3;
         }
 
         return vertices;
@@ -43,9 +43,9 @@ public static class Extensions
                 Mathf.PerlinNoise(y, z) + Mathf.PerlinNoise(z, y)) / 6;
     }
 
-    public static int[] ValueTable = {1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7};
+    public static readonly int[] ValueTable = {1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7};
 
-    public static int[] EdgeTable =
+    public static readonly int[] EdgeTable =
     {
         0x0, 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
         0x80c, 0x905, 0xa0f, 0xb06, 0xc0a, 0xd03, 0xe09, 0xf00,
@@ -81,7 +81,7 @@ public static class Extensions
         0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0
     };
 
-    public static int[][] TriTable =
+    public static readonly int[][] TriTable =
     {
         new[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         new[] {0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},

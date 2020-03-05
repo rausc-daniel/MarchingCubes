@@ -4,14 +4,14 @@ using UnityEngine;
 
 public struct Chunk
 {
-    private readonly int size;
-    private readonly int resolution;
-    private readonly Vector3 offset;
-    private readonly Func<float, float, float, float> noiseFunc;
-    private readonly float noiseSize;
+    private readonly int _size;
+    private readonly int _resolution;
+    private readonly Vector3 _offset;
+    private readonly Func<float, float, float, float> _noiseFunc;
+    private readonly float _noiseSize;
 
-    private readonly float[] values;
-    private readonly Vector3[] nodes;
+    private readonly float[] _values;
+    private readonly Vector3[] _nodes;
 
     /// <summary>
     /// Initialize a new Chunk
@@ -23,14 +23,14 @@ public struct Chunk
     /// <param name="noiseSize">the resolution of the noise</param>
     public Chunk(int size, int resolution, Vector3 offset, Func<float, float, float, float> noiseFunc, float noiseSize)
     {
-        this.size = size + 1;
-        this.resolution = resolution + 1;
-        this.offset = offset;
-        this.noiseFunc = noiseFunc;
-        this.noiseSize = noiseSize;
+        this._size = size + 1;
+        this._resolution = resolution + 1;
+        this._offset = offset;
+        this._noiseFunc = noiseFunc;
+        this._noiseSize = noiseSize;
 
-        values = new float[Mathf.RoundToInt(Mathf.Pow(this.resolution, 3))];
-        nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(this.resolution, 3))];
+        _values = new float[Mathf.RoundToInt(Mathf.Pow(this._resolution, 3))];
+        _nodes = new Vector3[Mathf.RoundToInt(Mathf.Pow(this._resolution, 3))];
     }
 
     /// <summary>
@@ -38,18 +38,18 @@ public struct Chunk
     /// </summary>
     public void CalculatePoints()
     {
-        for (var x = 0; x < resolution; x++)
+        for (var x = 0; x < _resolution; x++)
         {
-            for (var y = 0; y < resolution; y++)
+            for (var y = 0; y < _resolution; y++)
             {
-                for (var z = 0; z < resolution; z++)
+                for (var z = 0; z < _resolution; z++)
                 {
                     var index = GetIndex(x, y, z);
-                    var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
-                    nodes[index] = pos;
-                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
-                                      new Vector3(x, y, z) * noiseSize / resolution;
-                    values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
+                    var pos = _offset * (_size - (float) _size / _resolution) + new Vector3(x, y, z) * _size / _resolution;
+                    _nodes[index] = pos;
+                    var noiseOffset = _offset * (_noiseSize - _noiseSize / _resolution) +
+                                      new Vector3(x, y, z) * _noiseSize / _resolution;
+                    _values[index] = _noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
         }
@@ -64,11 +64,11 @@ public struct Chunk
     {
         var vertices = new List<Vector3>();
 
-        for (var x = 0; x < resolution - 1; x++)
+        for (var x = 0; x < _resolution - 1; x++)
         {
-            for (var y = 0; y < resolution - 1; y++)
+            for (var y = 0; y < _resolution - 1; y++)
             {
-                for (var z = 0; z < resolution - 1; z++)
+                for (var z = 0; z < _resolution - 1; z++)
                 {
                     var indices = new[]
                     {
@@ -86,8 +86,8 @@ public struct Chunk
                     var cubeIndex = 0;
                     for (var i = 0; i < 8; i++)
                     {
-                        corners[i] = nodes[indices[i]];
-                        if (values[indices[i]] > isoLevel)
+                        corners[i] = _nodes[indices[i]];
+                        if (_values[indices[i]] > isoLevel)
                         {
                             cubeIndex |= Mathf.RoundToInt(Mathf.Pow(2, i));
                         }
@@ -101,7 +101,7 @@ public struct Chunk
                         if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
                         {
                             vertList[i] = InterpolateVerts(isoLevel, corners[i % 8], corners[Extensions.ValueTable[i]],
-                                values[indices[i % 8]], values[indices[Extensions.ValueTable[i]]]);
+                                _values[indices[i % 8]], _values[indices[Extensions.ValueTable[i]]]);
                         }
                     }
 
@@ -140,5 +140,5 @@ public struct Chunk
     /// <param name="y">y-coordinate</param>
     /// <param name="z">z-coordinate</param>
     /// <returns>the index in a 1-dimensional array</returns>
-    private int GetIndex(int x, int y, int z) => resolution * resolution * z + resolution * y + x;
+    private int GetIndex(int x, int y, int z) => _resolution * _resolution * z + _resolution * y + x;
 }

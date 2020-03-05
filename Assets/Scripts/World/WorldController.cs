@@ -22,8 +22,8 @@ public class WorldController : MonoBehaviour
                 {
                     var go = new GameObject($"Chunk [{x}, {y}, {z}]");
                     var filter = go.AddComponent<MeshFilter>();
-                    var renderer = go.AddComponent<MeshRenderer>();
-                    renderer.material = material;
+                    var meshRenderer = go.AddComponent<MeshRenderer>();
+                    meshRenderer.material = material;
                     var chunk = new Chunk(chunkSize, chunkRes, new Vector3(x, y, z), Extensions.Noise, 2);
                     chunk.CalculatePoints();
                     RenderMesh(chunk.March(isoLevel), filter);
@@ -34,8 +34,7 @@ public class WorldController : MonoBehaviour
 
     private void RenderMesh(Vector3[] vertices, MeshFilter filter)
     {
-        var mesh = new Mesh();
-        mesh.vertices = vertices;
+        var mesh = new Mesh {vertices = vertices};
         var triangles = new int[vertices.Length - vertices.Length % 3];
         for (var i = 0; i < triangles.Length; i += 3)
         {
@@ -48,10 +47,7 @@ public class WorldController : MonoBehaviour
         mesh.RecalculateNormals();
 
         filter.mesh = mesh;
-        var collider = filter.gameObject.AddComponent<MeshCollider>();
-        collider.sharedMesh = null;
-        collider.sharedMesh = mesh;
+        var meshCollider = filter.gameObject.AddComponent<MeshCollider>();
+        meshCollider.sharedMesh = mesh;
     }
-
-    private Vector3 cubePosition;
 }

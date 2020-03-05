@@ -11,10 +11,10 @@ public enum State
 
 public class Corner : MonoBehaviour
 {
-    public int Id;
-    public Action<int, MeshRenderer> OnClick;
-    public float Value;
-    public State State;
+    public int Id { get; set; }
+    public Action<int, MeshRenderer> OnClick { get; set; }
+    public float Value { get; private set; }
+    public State State { get; set; }
 
     private MeshRenderer _renderer;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Triangle
 {
-    public Vector3[] Vertices;
+    public readonly Vector3[] Vertices;
 
     public Triangle(Vector3[] vertices)
     {
@@ -16,14 +16,14 @@ public class Cube : MonoBehaviour
 {
     [SerializeField, Range(0, 1)] private float isoValue = default;
 
-    private int[] active;
-    private Corner[] corners;
+    private int[] _active;
+    private Corner[] _corners;
     private MeshFilter _filter;
 
     private void Awake()
     {
-        active = new int[8];
-        corners = new Corner[8];
+        _active = new int[8];
+        _corners = new Corner[8];
         _filter = GetComponent<MeshFilter>();
     }
 
@@ -41,10 +41,10 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-        if (corners is null)
+        if (_corners is null)
             return;
 
-        foreach (var corner in corners)
+        foreach (var corner in _corners)
         {
             if (corner is null)
                 continue;
@@ -71,32 +71,32 @@ public class Cube : MonoBehaviour
         var corner = go.AddComponent<Corner>();
         corner.Id = id;
         corner.OnClick = CornerToggle;
-        corners[id] = corner;
+        _corners[id] = corner;
     }
 
     private List<Triangle> triangles;
 
     private void CornerToggle(int id, MeshRenderer renderer)
     {
-        active[id] = (active[id] + 1) % 2;
-        renderer.material.color = active[id] == 1 ? Color.red : Color.white;
-        var edgeIndex = Extensions.EdgeTable[active.Index()];
+        _active[id] = (_active[id] + 1) % 2;
+        renderer.material.color = _active[id] == 1 ? Color.red : Color.white;
+        var edgeIndex = Extensions.EdgeTable[_active.Index()];
         var vertList = new Vector3[12];
         for (var i = 0; i < 12; i++)
         {
             if ((edgeIndex & Mathf.RoundToInt(Mathf.Pow(2, i))) != 0)
             {
-                vertList[i] = Vector3.Lerp(corners[i % 8].transform.position,
-                    corners[Extensions.ValueTable[i]].transform.position, 0.5f);
+                vertList[i] = Vector3.Lerp(_corners[i % 8].transform.position,
+                    _corners[Extensions.ValueTable[i]].transform.position, 0.5f);
             }
         }
 
         triangles = new List<Triangle>();
-        for (var i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
+        for (var i = 0; Extensions.TriTable[_active.Index()][i] != -1; i += 3)
         {
-            var p0 = vertList[Extensions.TriTable[active.Index()][i]];
-            var p1 = vertList[Extensions.TriTable[active.Index()][i + 1]];
-            var p2 = vertList[Extensions.TriTable[active.Index()][i + 2]];
+            var p0 = vertList[Extensions.TriTable[_active.Index()][i]];
+            var p1 = vertList[Extensions.TriTable[_active.Index()][i + 1]];
+            var p2 = vertList[Extensions.TriTable[_active.Index()][i + 2]];
             triangles.Add(new Triangle(new[] {p0, p1, p2}));
         }
 
@@ -120,19 +120,4 @@ public class Cube : MonoBehaviour
 
         _filter.mesh = mesh;
     }
-
-//    private void OnDrawGizmos()
-//    {
-//        if (triangles == null) return;
-//
-//        foreach (var pos in triangles)
-//        {
-//            foreach (var vertex in pos.Vertices)
-//            {
-//                if (vertex == default) continue;
-//
-//                Gizmos.DrawWireSphere(transform.position + vertex, 0.1f);
-//            }
-//        }
-//    }
 }
