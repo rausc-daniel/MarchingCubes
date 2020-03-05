@@ -2,15 +2,15 @@
 
 public class WorldController : MonoBehaviour
 {
-    [SerializeField] private int chunkSize;
-    [SerializeField] private int chunkRes;
+    [SerializeField] private int chunkSize = default;
+    [SerializeField] private int chunkRes = default;
 
     [SerializeField, Tooltip("How many Chunks should be generated in each direction")]
-    private Vector3Int spread;
+    private Vector3Int spread = default;
 
-    [SerializeField] private Material material;
+    [SerializeField] private Material material = default;
 
-    [SerializeField, Range(0, 1)] private float isoLevel;
+    [SerializeField, Range(0, 1)] private float isoLevel = default;
 
     private void Awake()
     {
