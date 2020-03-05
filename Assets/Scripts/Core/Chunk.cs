@@ -47,7 +47,8 @@ public struct Chunk
                     var index = GetIndex(x, y, z);
                     var pos = offset * (size - (float) size / resolution) + new Vector3(x, y, z) * size / resolution;
                     nodes[index] = pos;
-                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) + new Vector3(x, y, z) * noiseSize / resolution;
+                    var noiseOffset = offset * (noiseSize - noiseSize / resolution) +
+                                      new Vector3(x, y, z) * noiseSize / resolution;
                     values[index] = noiseFunc(noiseOffset.x, noiseOffset.y, noiseOffset.z);
                 }
             }
@@ -87,7 +88,9 @@ public struct Chunk
                     {
                         corners[i] = nodes[indices[i]];
                         if (values[indices[i]] > isoLevel)
+                        {
                             cubeIndex |= Mathf.RoundToInt(Mathf.Pow(2, i));
+                        }
                     }
 
                     var edgeIndex = Extensions.EdgeTable[cubeIndex];

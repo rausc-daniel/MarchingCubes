@@ -10,6 +10,8 @@ public class WorldController : MonoBehaviour
 
     [SerializeField] private Material material;
 
+    [SerializeField, Range(0, 1)] private float isoLevel;
+
     private void Awake()
     {
         for (var x = 0; x < spread.x; x++)
@@ -24,7 +26,7 @@ public class WorldController : MonoBehaviour
                     renderer.material = material;
                     var chunk = new Chunk(chunkSize, chunkRes, new Vector3(x, y, z), Extensions.Noise, 2);
                     chunk.CalculatePoints();
-                    RenderMesh(chunk.March(0.5f), filter);
+                    RenderMesh(chunk.March(isoLevel), filter);
                 }
             }
         }
@@ -32,8 +34,6 @@ public class WorldController : MonoBehaviour
 
     private void RenderMesh(Vector3[] vertices, MeshFilter filter)
     {
-        Debug.Log(vertices.Length);
-
         var mesh = new Mesh();
         mesh.vertices = vertices;
         var triangles = new int[vertices.Length - vertices.Length % 3];
