@@ -14,7 +14,7 @@ public struct Triangle
 
 public class Cube : MonoBehaviour
 {
-    [SerializeField, Range(0, 1)] private float isoValue;
+    [SerializeField, Range(0, 1)] private float isoValue = default;
 
     private int[] active;
     private Corner[] corners;
@@ -91,7 +91,6 @@ public class Cube : MonoBehaviour
             }
         }
 
-        var current = 0;
         triangles = new List<Triangle>();
         for (var i = 0; Extensions.TriTable[active.Index()][i] != -1; i += 3)
         {

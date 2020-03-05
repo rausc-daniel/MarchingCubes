@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Visualization : MonoBehaviour
 {
-    [SerializeField] private int size;
-    [SerializeField] private int resolution;
-    [SerializeField] private Material material;
-    [SerializeField] private float isoLevel;
-    [SerializeField] private float delay;
-    [SerializeField] private float noiseSize;
+    [SerializeField] private int size = default;
+    [SerializeField] private int resolution = default;
+    [SerializeField] private Material material = default;
+    [SerializeField] private float isoLevel = default;
+    [SerializeField] private float delay = default;
+    [SerializeField] private float noiseSize = default;
 
     private Vector3 offset = Vector3.zero;
     private Func<float, float, float, float> noiseFunc = Extensions.Noise;

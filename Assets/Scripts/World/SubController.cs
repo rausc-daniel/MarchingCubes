@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class SubController : MonoBehaviour
 {
-    [SerializeField] private float acceleration;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float angularAcceleration;
-    [SerializeField] private float maxTorque;
+    [SerializeField] private float acceleration = default;
+    [SerializeField] private float maxSpeed = default;
+    [SerializeField] private float angularAcceleration = default;
+    [SerializeField] private float maxTorque = default;
 
     private Rigidbody _rigidbody;
 
