@@ -1,59 +1,59 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SubController : MonoBehaviour
+namespace World
 {
-    [SerializeField] private float acceleration = default;
-    [SerializeField] private float maxSpeed = default;
-    [SerializeField] private float angularAcceleration = default;
-    [SerializeField] private float maxTorque = default;
-
-    private Rigidbody _rigidbody;
-
-    private void Awake()
+    public class SubController : MonoBehaviour
     {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+        [SerializeField] private float acceleration = default;
+        [SerializeField] private float maxSpeed = default;
+        [SerializeField] private float angularAcceleration = default;
+        [SerializeField] private float maxTorque = default;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.W))
+        private Rigidbody _rigidbody;
+
+        private void Awake()
         {
-            _rigidbody.AddForce(acceleration * Time.deltaTime * transform.forward);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            _rigidbody.AddForce(acceleration * Time.deltaTime * -transform.forward);
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
-        if (Input.GetKey(KeyCode.D))
+        private void Update()
         {
-            _rigidbody.AddTorque(transform.up * angularAcceleration);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            _rigidbody.AddTorque(-transform.up * angularAcceleration);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                _rigidbody.AddForce(acceleration * Time.deltaTime * transform.forward);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                _rigidbody.AddForce(acceleration * Time.deltaTime * -transform.forward);
+            }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            _rigidbody.AddForce(acceleration * Time.deltaTime * transform.up);
-        }
-        else if (Input.GetKey(KeyCode.Q))
-        {
-            _rigidbody.AddForce(acceleration * Time.deltaTime * -transform.up);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _rigidbody.AddTorque(transform.up * angularAcceleration);
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                _rigidbody.AddTorque(-transform.up * angularAcceleration);
+            }
 
-        var currentVelocity = _rigidbody.velocity;
-        _rigidbody.velocity = new Vector3(Mathf.Clamp(currentVelocity.x, -maxSpeed, maxSpeed),
-            Mathf.Clamp(currentVelocity.y, -maxSpeed, maxSpeed),
-            Mathf.Clamp(currentVelocity.z, -maxSpeed, maxSpeed));
+            if (Input.GetKey(KeyCode.E))
+            {
+                _rigidbody.AddForce(acceleration * Time.deltaTime * transform.up);
+            }
+            else if (Input.GetKey(KeyCode.Q))
+            {
+                _rigidbody.AddForce(acceleration * Time.deltaTime * -transform.up);
+            }
 
-        var currentAngularVelocity = _rigidbody.angularVelocity;
-        _rigidbody.angularVelocity = new Vector3(Mathf.Clamp(currentAngularVelocity.x, -maxTorque, maxTorque),
-            Mathf.Clamp(currentAngularVelocity.y, -maxTorque, maxTorque),
-            Mathf.Clamp(currentAngularVelocity.z, -maxTorque, maxTorque));
+            var currentVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = new Vector3(Mathf.Clamp(currentVelocity.x, -maxSpeed, maxSpeed),
+                Mathf.Clamp(currentVelocity.y, -maxSpeed, maxSpeed),
+                Mathf.Clamp(currentVelocity.z, -maxSpeed, maxSpeed));
+
+            var currentAngularVelocity = _rigidbody.angularVelocity;
+            _rigidbody.angularVelocity = new Vector3(Mathf.Clamp(currentAngularVelocity.x, -maxTorque, maxTorque),
+                Mathf.Clamp(currentAngularVelocity.y, -maxTorque, maxTorque),
+                Mathf.Clamp(currentAngularVelocity.z, -maxTorque, maxTorque));
+        }
     }
 }
