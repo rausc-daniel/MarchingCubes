@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Security.Cryptography;
+using NaughtyAttributes;
+using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
@@ -10,9 +12,36 @@ public class WorldController : MonoBehaviour
 
     [SerializeField] private Material material = default;
 
+    [OnValueChanged("RegenerateMeshes")]
     [SerializeField, Range(0, 1)] private float isoLevel = default;
-
+    
     private void Awake()
+    {
+        GenerateMeshes();
+    }
+    
+    /// <summary>
+    /// Callback for a NaughtyAttributes <see cref="OnValueChangedAttribute"/>. Sets the isoValue to
+    /// <paramref name="newValue"/> and starts the mesh generation.
+    /// <param name="oldValue">The value before the field was changed.</param>
+    /// <param name="newValue">The new value after the change.</param>
+    /// </summary>
+    private void RegenerateMeshes(float oldValue, float newValue)
+    {
+        DestroyOldChunks();
+        isoLevel = newValue;
+        GenerateMeshes();
+    }
+
+    private void DestroyOldChunks()
+    {
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+    }
+
+    private void GenerateMeshes()
     {
         for (var x = 0; x < spread.x; x++)
         {
@@ -21,6 +50,7 @@ public class WorldController : MonoBehaviour
                 for (var z = 0; z < spread.z; z++)
                 {
                     var go = new GameObject($"Chunk [{x}, {y}, {z}]");
+                    go.transform.SetParent(transform);
                     var filter = go.AddComponent<MeshFilter>();
                     var renderer = go.AddComponent<MeshRenderer>();
                     renderer.material = material;
