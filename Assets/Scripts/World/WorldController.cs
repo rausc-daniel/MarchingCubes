@@ -1,4 +1,5 @@
-﻿using Core;
+using Core;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace World
@@ -13,9 +14,36 @@ namespace World
 
         [SerializeField] private Material material = default;
 
-        [SerializeField, Range(0, 1)] private float isoLevel = default;
+        [OnValueChanged("RegenerateMeshes")] [SerializeField, Range(0, 1)]
+        private float isoLevel = default;
 
         private void Awake()
+        {
+            GenerateMeshes();
+        }
+
+        /// <summary>
+        /// Callback for a NaughtyAttributes <see cref="OnValueChangedAttribute"/>. Sets the isoValue to
+        /// <paramref name="newValue"/> and starts the mesh generation.
+        /// <param name="oldValue">The value before the field was changed.</param>
+        /// <param name="newValue">The new value after the change.</param>
+        /// </summary>
+        private void RegenerateMeshes(float oldValue, float newValue)
+        {
+            DestroyOldChunks();
+            isoLevel = newValue;
+            GenerateMeshes();
+        }
+
+        private void DestroyOldChunks()
+        {
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+
+        private void GenerateMeshes()
         {
             for (var x = 0; x < spread.x; x++)
             {
@@ -24,9 +52,10 @@ namespace World
                     for (var z = 0; z < spread.z; z++)
                     {
                         var go = new GameObject($"Chunk [{x}, {y}, {z}]");
+                        go.transform.SetParent(transform);
                         var filter = go.AddComponent<MeshFilter>();
-                        var meshRenderer = go.AddComponent<MeshRenderer>();
-                        meshRenderer.material = material;
+                        var renderer = go.AddComponent<MeshRenderer>();
+                        renderer.material = material;
                         var chunk = new Chunk(chunkSize, chunkRes, new Vector3(x, y, z), Extensions.Noise, 2);
                         chunk.CalculatePoints();
                         RenderMesh(chunk.March(isoLevel), filter);
